@@ -1,0 +1,18 @@
+# Define Variables
+RESOURCE_GROUP="rg-zerobig-containerapps-demo"
+LOCATION="eastasia"
+CONTAINERAPPS_ENVIRONMENT="env-zerobig-containerapps-demo"
+
+# Create a Resource Group
+az group create \
+  --name $RESOURCE_GROUP \
+  --location "$LOCATION"
+
+# Deploy a container apps
+az deployment group create \
+  --resource-group "$RESOURCE_GROUP" \
+  --template-file ./zero-cta-demo.bicep \
+  --parameters \
+      environment_name="$CONTAINERAPPS_ENVIRONMENT" \
+      location="$LOCATION" 
+      storage_container_name="$STORAGE_ACCOUNT_CONTAINER"
